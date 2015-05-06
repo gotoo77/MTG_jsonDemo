@@ -1,0 +1,46 @@
+<div ng-show="show_debug">
+    <!-- controllerName -->
+    controllerName: <span class="label label-primary"> {{name}} </span>
+    <!-- extensionID -->
+    | extensionID: <span class="label label-info"> {{params.myExtension}} </span>
+    <!-- params -->
+    | params:<span class="label label-warning">  {{params.template}}</span>
+
+</div>
+
+<div ng-controller ="ExtensionController" class="section">
+    <div class="section section-breadcrumbs">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <!-- Page Title -->
+                    <h1>{{title}}</h1>
+
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+    <!-- data.extension -->
+    <!--<div>{{data.extension.cards}}</div>-->
+    <div class="section-white">
+        <ul>
+            <li> name:{{data.extension.name}}    </li>
+            <li> code:{{data.extension.code}}    </li>
+            <li> magicCardsInfoCode:{{data.extension.magicCardsInfoCode}}    </li>
+            <li> releaseDate:{{data.extension.releaseDate}}    </li>
+            <li> border:{{data.extension.border}}    </li>
+            <li> type:{{data.extension.type}}    </li>
+            <li> block:{{data.extension.block}}    </li>
+            <li> booster:{{data.extension.booster}}    </li>
+        </ul>
+    </div>
+    <div class="section-grey">
+           <h2>Liste des Cartes de ce bloc:</h2>
+        <ul>
+            <li ng-repeat="card in data.extension.cards track by $index"> <a href="Extension/{{params.myExtension}}/Card/{{card.name}}">{{card.name}} </a>    </li>
+        </ul>
+    </div>
+</div>

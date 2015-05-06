@@ -1,0 +1,121 @@
+<div ng-show="show_debug">
+    <!-- controllerName -->
+    controllerName: <span class="label label-primary"> {{name}} </span>
+    <!-- extensionID -->
+    | myDef: <span class="label label-info"> {{params.myDef}} </span>
+    <!-- params -->
+    | params:<span class="label label-warning">  {{params.template}}</span>
+</div>
+
+<!-- Page Title -->
+<div ng-controller ="DefinitionsCtrl" class="section">
+    <div class="section section-breadcrumbs">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1>{{title}}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 faq-wrapper">
+                <p>
+                    <button class="btn btn-default btn-sm" ng-click="openAllPanels()">Tout Deplier</button>
+                    <button class="btn btn-default btn-sm" ng-click="closeAllPanels()">Tout Replier</button>
+                </p>
+
+                <div class="row">
+                    <div class="col-md-4"><input ng-model="search.$" type="text" class="form-control" id="any" placeholder="all filters"></div>
+                    <div class="col-md-4"><input ng-model="search.title" type="text" class="form-control" id="title" placeholder="by Title"></div>
+                    <div class="col-md-4">
+                        <select ng-model="search.tags" class="form-control"
+                                data-ng-options="tag for tag in tags">
+                            <optgroup label = "Choose One"/>
+                        </select>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"><input ng-model="search.createdBy.name" type="text" class="form-control" id="createdByname" placeholder="by createdBy.name"></div>
+                    <div class="col-md-4"><input ng-model="search.content" type="text" class="form-control" id="content" placeholder="by content"></div>
+                    <div class="col-md-4"><input ng-model="search.imgs" type="text" class="form-control" id="imgs" placeholder="by imgs"></div>
+                </div>
+                Equality <input type="checkbox" ng-model="strict"><br>
+                <hr/>
+                <code>Tri par predicate = {{predicate}}; reverse = {{reverse}}</code>
+                [ <a href="" ng-click="predicate=''">non-trié</a> ]
+                <table class="def">
+                    <tr>
+                        <th>	 <a href="" ng-click="predicate = 'title'; reverse=false">title</a>
+                            (<a href="" ng-click="predicate = '-title'; reverse=false">^</a>)				 </th>
+                        <th> 	<a href="" ng-click="predicate = 'content'; reverse=!reverse">content</a> 		</th>
+                        <th> 	<a href="" ng-click="predicate = 'createdBy.name'; reverse=!reverse">createdBy.name</a> 		</th>
+                        <th> 	<a href="" ng-click="predicate = 'imgs'; reverse=!reverse">imgs</a> 		</th>
+                        <th> 	<a href="" ng-click="predicate = 'tags'; reverse=!reverse">tags</a> 		</th>
+                    </tr>
+                </table>
+
+                <label class="checkbox">
+                    <input type="checkbox" ng-model="oneAtATime">
+                    Ouvrir un item à la fois
+                </label>
+                <accordion close-others="oneAtATime">
+                    <div class="panel-heading">
+                        <accordion-group  ng-repeat="def in data.definitions | filter:search:strict | orderBy:predicate:reverse" ng-class="def.type" is-open="def.open">
+                            <accordion-heading>
+                                {{def.title}} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': def.open, 'glyphicon-chevron-right': !def.open}"></i>
+                            </accordion-heading>
+                            <div class="accordion-inner">
+                                <div ng-if="showMeaning(def)"><em>Signification</em> : <strong>{{def.meaning}}</strong></div>
+                                <div ng-if="showTags(def)"> <span ng-repeat="tag in def.tags track by $index" class="label label-info">{{tag}}</span> </div>
+                                <p ng-if="showContent(def)">
+                                <p ng-bind-html="renderHtml(def.content)"></p>
+                                <div ng-if="showImgs(def)"class="container">
+                                    <hr>
+                                    <div class="carousel slide article-slide myCarousel" id="{{def.title}}">
+                                        <div class="carousel-inner cont-slider">
+                                            <div ng-class="{active : $first}" ng-repeat="img in def.imgs track by $index" class="item" >
+                                                <img ng-src="{{img}}" class="MPOS_SlideLarge">
+                                            </div>
+                                        </div>
+                                        <ol class="carousel-indicators visible-lg visible-md">
+                                            <li ng-class="{active : $first}" ng-repeat="img in def.imgs track by $index"  data-slide-to="$index" data-target="#{{def.title}}">
+                                                <img ng-src="{{img}}" class="MPOS_SlideSmall">
+                                            </li>
+                                        </ol>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div ng-if="showLinks(def)">
+                                    <div>Lien(s) annexe(s):</div>
+                                    <ul>
+                                        <li ng-repeat="lnk in def.links track by $index" ><a href="{{lnk}}"> {{lnk}} </a></li>
+                                    </ul>
+                                </div>
+                                <hr>
+                                <div ng-if="showCreatedBy(def)" class="MPOS_Poster">
+                                    <div>Créateur: {{def.createdBy.name}}</div>
+                                    <img ng-src="{{def.createdBy.avatarFileName}}" class="site_UserAvatar"/>
+                                </div>
+                                </p>
+                            </div>
+                        </accordion-group>
+                        <accordion-group is-open="status.open">
+                            <accordion-heading >
+                                <span style="color:red;">Dynamic Body Content </span>
+                                <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                            </accordion-heading>
+                            <p>The body of the accordion group grows to fit the contents</p>
+                            <button class="btn btn-default btn-sm" ng-click="addItem()">Add Item</button>
+                            <div ng-repeat="item in items">{{item}}</div>
+                        </accordion-group>
+                    </div>
+                </accordion>
+            </div>
+        </div>
+    </div>
+</div>
+

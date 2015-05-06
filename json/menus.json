@@ -1,0 +1,43 @@
+[
+  {
+    "id"    :   "1",
+    "title" :   "Accueil",
+    "link"  :   "home"
+  },
+  {
+    "id"    :   "2",
+    "title" :   "Regles&Defs",
+    "link"  :   "definitions/mydef"
+  },
+  {
+    "id"    :   "3",
+    "title" :   "Cards",
+    "link"  :   "Extension/DTK/Card/democard"
+  },
+  {
+    "id"    :   "4",
+    "title" :   "DTK",
+    "link"  :   "Extension/DTK"
+  },
+  {
+    "id"    :   "5",
+    "title" :   "MasterDetailCtrl",
+    "link"  :   "MasterDetail/1"
+  },
+  {
+    "id"    :   "6",
+    "title" :   "Search",
+    "link"  :   "Search/idCard"
+  },
+  {
+    "id"    :   "7",
+    "title" :   "C14",
+    "link"  :   "Extension/C14"
+  },
+  {
+    "id"    :   "8",
+    "title" :   "DD3_DVD",
+    "link"  :   "Extension/DD3_DVD"
+  }
+]
+

@@ -1,0 +1,64 @@
+<div ng-show="show_debug">
+    <!-- controllerName -->
+    name: <span class="label label-primary"> {{name}} </span>
+    <!-- myId -->
+    | myId: <span class="label label-info"> {{params.myId}} </span>
+    <!-- params -->
+    | params:<span class="label label-warning">  {{params.template}}</span>
+</div>
+
+<div class="section section-breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <!-- Page Title -->
+                <h1>{{name}}</h1>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="divMasterDetailWrapper" ng-controller='MasterDetailCtrl' style="position:relative;">
+
+    <!-- First, we have our left-hand list of Customer names -->
+    <div id="divMasterView">
+        <div id="{{customer.customerid}}" class="cssOneCompanyRecord" ng-class="{cssCompanySelectedRecord: Customer.CustomerID == selectedCustomer}" ng-repeat='Customer in listOfCustomers' ng-click="selectCustomer(Customer);">
+            <div class="cssCompanyName">{{Customer.CompanyName}}</div>
+            <div class="cssCompanyCity">{{Customer.City}}</div>
+            <div class="cssCustomerID">{{Customer.CustomerID}}</div>
+            <img src='./img/icnOffice.png' title="This is a tooltip for the company: {{Customer.CompanyName}}" class="cssCustomerIcon" />
+        </div>
+    </div>
+
+    <!-- Then, we have our right-hand panel, showing one Customer's orders -->
+    <div id="divDetailView">
+        <!-- Get AngularJS to create one DIV for each Order that this Customer has made. -->
+        <div id="Order_{{Order.OrderID}}" ng-repeat="Order in listOfOrders" class="cssOneOrderRecord">
+            <!-- Each Order will have a header bar, with Order ID and date. -->
+            <div class="cssOneOrderHeader">
+                <div class="cssOrderID">Order # {{Order.OrderID}}</div>
+                <div class="cssOrderDate">Order Date: {{Order.OrderDate}}</div>
+            </div>
+
+            <!-- AngularJS will create one DIV for each Product in this particular Order -->
+            <div class="cssOneProductRecord" ng-repeat='Product in Order.ProductsInBasket | filter:ProductsInOrder' ng-class="{ cssProductEven: (($index%2) == 0), cssProductOdd: ($index%2)}">
+                <div class="cssOneProductQty">{{Product.Quantity}}</div>
+                <div class="cssOneProductName">{{Product.ProductName}}</div>
+                <div class="cssOneProductPrice">@ {{Product.UnitPrice | currency}}</div>
+                <div class="cssOneProductSubtotal">{{Product.UnitPrice * Product.Quantity | currency}}</div>
+            </div>
+
+            <!-- The fiddly bit - calculating totals for this Order -->
+            <div class="cssOneOrderTotal">
+                <div class="cssOneProductQty">
+                    {{Order.ProductsInBasket|countItemsInOrder}} item(s), {{Order.ProductsInBasket.length}} product(s)
+                </div>
+                <div class="cssOneProductSubtotal">
+                    {{Order.ProductsInBasket|orderTotal | currency}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

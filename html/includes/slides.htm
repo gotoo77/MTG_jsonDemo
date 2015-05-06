@@ -1,0 +1,31 @@
+
+<!-- Homepage Slider -->
+
+    <div id="sequence" ng-controller="SharedDataController">
+        <ul class="sequence-canvas">
+            <li class="bg1">
+                <h2 class="title">{{shareddata.imgs.slides[0].title}}</h2>
+                <h3 class="subtitle">{{shareddata.imgs.slides[0].subtitle}}</h3>
+                <img class="slide-img" ng-src="{{shareddata.imgs.slides[0].img}}" height="150px" alt="Slide 1" />
+            </li>
+            <li class="bg2">
+                <h2 class="title">{{shareddata.imgs.slides[1].title}}</h2>
+                <h3 class="subtitle">{{shareddata.imgs.slides[1].subtitle}}</h3>
+                <img class="slide-img" ng-src="{{shareddata.imgs.slides[1].img}}" height="150px" alt="Slide 1" />
+            </li>
+            <li ng-repeat="s in shareddata.imgs.slides">
+                <h2 class="">s.title</h2>
+                <h3 class="">s.subtitle</h3>
+                <img class="" ng-src="{{s.img}}" alt="slide.img" />
+            </li>
+        </ul>
+        <div class="sequence-pagination-wrapper">
+            <ul class="sequence-pagination">
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+            </ul>
+        </div>
+    </div>
+<!-- End Homepage Slider -->

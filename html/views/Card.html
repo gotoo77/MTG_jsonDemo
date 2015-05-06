@@ -1,0 +1,96 @@
+<div ng-show="show_debug">
+    <!-- controllerName -->
+    controllerName: <span class="label label-primary"> {{name}} </span>
+    <!-- params.myExtension -->
+    | params.myExtension: <span class="label label-info"> {{params.myExtension}} </span>
+    <!-- params.myCard -->
+    | params.myCard:<span class="label label-warning">  {{params.myCard}}</span>
+</div>
+
+<div ng-controller ="CardController" class="section">
+    <div class="section section-breadcrumbs">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <!-- Page Title -->
+                    <h1>{{title}}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- data.card -->
+    <!--<div>{{data.card.cards}}</div>-->
+    <div class="section-white">
+        <ul>
+            <li ng-if="showLayout(data.card)"> layout:{{data.card.layout}}    </li>
+            <li ng-if="showType(data.card)"> type:{{data.card.type}}    </li>
+            <li ng-if="showTypes(data.card)"> types:{{data.card.types}}    </li>
+            <li ng-if="showColors(data.card)"> colors:{{data.card.colors}}    </li>
+            <li ng-if="showMultiverseid(data.card)"> multiverseid:{{data.card.multiverseid}}    </li>
+            <li ng-if="showName(data.card)"> name:{{data.card.name}}    </li>
+            <li ng-if="showSubtypes(data.card)"> subtypes:{{data.card.subtypes}}    </li>
+            <li ng-if="showCmc(data.card)"> cmc:{{data.card.cmc}}    </li>
+            <li ng-if="showRarity(data.card)"> rarity:{{data.card.rarity}}    </li>
+            <li ng-if="showPower(data.card)"> power:{{data.card.power}}    </li>
+            <li ng-if="showToughness(data.card)" > toughness:{{data.card.toughness}}    </li>
+            <li ng-if="showManaCost(data.card)"> manaCost:{{data.card.manaCost}}    </li>
+            <li ng-if="showText(data.card)"> text:{{data.card.text}}    </li>
+            <li ng-if="showNumber(data.card)"> number:{{data.card.number}}    </li>
+            <li ng-if="showWatermark(data.card)"> watermark:{{data.card.watermark}}    </li>
+            <li ng-if="showImageName(data.card)"> imageName:{{data.card.imageName}}    </li>
+            <li ng-if="showArtist(data.card)"> artist:{{data.card.artist}}    </li>
+            <li ng-if="showFlavor(data.card)"> flavor:{{data.card.flavor}}    </li>
+
+        </ul>
+    </div>
+
+        <div class="mtgImgContainer">
+            <div class="mtgName">
+                {{data.card.name}}
+            </div>
+            <div class="mtgManaCost">
+                {{data.card.manaCost}}
+                <i ng-repeat="mc in data.card.toMC_Array(data.card.manaCost) track by $index" ng-class="getCssFromManasymbolTxt(mc)"></i>
+            </div>
+            <div class="mtgPicture">
+                {{data.card.Picture}}
+            </div>
+            <div class=mtgTypesandRarity">
+                <span class="mtgSuperType">
+                    {{data.card.types}}
+                    </span>
+                <span class="mtgType">
+                       {{data.card.type}}
+                    </span> -
+                <span class="mtgSubType">
+                       {{data.card.subtypes}}
+                </span>
+                <span class="mtgRarity">
+                       {{data.card.rarity}}
+                </span>
+            </div>
+            <div class="mtgDesc">
+                <div class="mtgText">
+                    {{data.card.text}}
+                </div>
+                <div class="mtgFlavor">
+                    {{data.card.flavor}}
+                </div>
+            </div>
+            <div class="mtgFooter">
+                <span class="mtgArtist">
+                    {{data.card.artist}}
+                </span>
+                <span class="mtgNumber">
+                    {{data.card.number}}
+                </span>
+                <div class="mtgPT">
+                    <span>  {{data.card.power}} </span>/<span>  {{data.card.toughness}} </span>
+                </div>
+            </div>
+
+        </div>
+
+
+
+</div>

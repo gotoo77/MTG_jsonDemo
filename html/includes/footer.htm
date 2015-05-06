@@ -1,0 +1,60 @@
+<div ng-controller="FooterController" id="footer" class="container">
+    <div ng-controller="SharedDataController" class="row">
+        <div class="col-footer col-md-1 col-xs-2">
+            <h3>Navigation</h3>
+            <ul class="no-list-style footer-navigate-section">
+                <li ng-repeat="menu in shareddata.menus track by $index">
+                    <a href="{{menu.link}}">{{menu.title}}</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-footer col-md-3 col-xs-6" ng-repeat="i in shareddata.footeritems track by $index">
+            <h3>{{i.title}}</h3>
+            <div class="portfolio-item">
+                <div class="portfolio-image">
+                    <a href="{{i.link}}"><img ng-src="{{shareddata.imgs.footer}}" class="site_PreviewFooter" alt="shareddata.imgs.footer"></a>
+                </div>
+            </div>
+        </div>
+<!--
+        <div class="col-footer col-md-3 col-xs-6">
+            <h3> MPOS</h3>
+            <div class="portfolio-item">
+                <div class="portfolio-image">
+                    <a href="MPOS"><img ng-src="{{shareddata.imgs.footer}}" class="site_PreviewFooter" alt="shareddata.imgs.footer"></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-footer col-md-3 col-xs-6">
+            <h3>Navigation</h3>
+            <ul class="no-list-style footer-navigate-section">
+                <li ng-repeat="menu in shareddata.menus track by $index">
+                    <a href="{{menu.link}}">{{menu.title}}</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-footer col-md-4 col-xs-6">
+            <h3>Point Transactions System</h3>
+            <p class="contact-us-details">
+                <b>Adresse:</b> Point Transactions System,
+                6 Rue Laferriere,
+                75009 PARIS,
+                France<br/>
+                <b>Téléphone:</b> +33.01.55.07.86.26<br/>
+                <b>Fax:</b> +33.01.55.07.86.26<br/>
+                <b>Email:</b> <a href="mailto:raphaeld1@verifone.com">raphaeld1@verifone.com</a>
+            </p>
+        </div>
+        <div class="col-footer col-md-2 col-xs-6">
+            <h3> tbd</h3>
+
+        </div>
+        -->
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="footer-copyright">&copy; 2015 GDU.</div>
+        </div>
+    </div>
+</div>
